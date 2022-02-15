@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: build-and-upload
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+  - name: docker
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      repo: oscaande/sonorandeserttoad
+      tags: latest
+      
+trigger:
+  branch:
+  - main
